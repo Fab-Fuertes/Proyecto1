@@ -18,6 +18,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class InterfazPrincipal extends javax.swing.JFrame {
 
+    List usuarios = new List();
+    
     /**
      * Creates new form InterfazPrincipal
      */
@@ -87,9 +89,35 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             fr = new FileReader(Archivo);
             br = new BufferedReader(fr);
             
+            String linea;
+            
+            while ((linea= br.readLine())!= null){
+                Usuarios u = new Usuarios();
+                String arreglo [] = linea.split(",");
+                if (arreglo.length >= 1){
+                    System.out.println(arreglo[0]);
+                    u.setUsuario(arreglo[0]);
+                }
+                
+                
+            }
+            
+            
         }catch(Exception e){
+            e.printStackTrace();
             
         }
+        finally{
+            try{
+                if (fr != null){
+                    fr.close();
+                }
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        
     }
     
     
