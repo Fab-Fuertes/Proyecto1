@@ -12,18 +12,13 @@ package proyecto1;
 public class Usuarios {
     
     private String usuario;
-    private String usuario2;
     
     
     public Usuarios(){
         this.usuario= null;
     }
     
-    public Usuarios(String usuariousuario2){
-        this.usuario = null;
-        this.usuario2= null;
-    }
-
+    
     public String getUsuario() {
         return usuario;
     }

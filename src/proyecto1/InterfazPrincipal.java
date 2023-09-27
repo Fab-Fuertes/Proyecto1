@@ -94,9 +94,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             
             while ((linea= br.readLine())!= null){
                 Usuarios u = new Usuarios();
-                Usuarios c = new Usuarios();
-                String arreglo [] = linea.split(",");
-                if (arreglo.length >= 1 && relaciones ==0){
+                
+                String arreglo[] = linea.split(",");
+                //String arreglo2[] = linea.split(",");
+                if (relaciones ==0){
                     System.out.println(arreglo[0]);
                     u.setUsuario(arreglo[0]);
                     
@@ -105,16 +106,15 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                     }
                     
                 
+                }else{
+                    System.out.println(arreglo[0] + "," + arreglo[1]);
+                    u.setUsuario(arreglo[0]);
+                    u.setUsuario(arreglo[1]);
+                    
                 }
                 
-  
-                if (arreglo.length >= 3 && relaciones == 1){
-                   System.out.println(arreglo[1]);
-                    c.setUsuario(arreglo[1]);
-                    c.setUsuario(arreglo[2]);
-                }
                 
-                
+                usuarios.addEnd(u);
             }
             
             
