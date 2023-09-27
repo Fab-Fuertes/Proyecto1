@@ -90,18 +90,28 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             br = new BufferedReader(fr);
             
             String linea;
+            int relaciones = 0;
             
             while ((linea= br.readLine())!= null){
                 Usuarios u = new Usuarios();
+                Usuarios c = new Usuarios();
                 String arreglo [] = linea.split(",");
-                if (arreglo.length >= 1){
+                if (arreglo.length >= 1 && relaciones ==0){
                     System.out.println(arreglo[0]);
                     u.setUsuario(arreglo[0]);
-                } 
-                if (linea == "relaciones"){
-                    System.out.println(arreglo[14]);
-                    u.setUsuario(arreglo[15]);
-                    u.setUsuario(arreglo[16]);
+                    
+                    if (linea. equals("relaciones")){
+                        relaciones ++;
+                    }
+                    
+                
+                }
+                
+  
+                if (arreglo.length >= 3 && relaciones == 1){
+                   System.out.println(arreglo[1]);
+                    c.setUsuario(arreglo[1]);
+                    c.setUsuario(arreglo[2]);
                 }
                 
                 
