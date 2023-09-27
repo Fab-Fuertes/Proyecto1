@@ -98,10 +98,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                     System.out.println(arreglo[0]);
                     u.setUsuario(arreglo[0]);
                 } 
-                if (u.getUsuario() == "relaciones" ){
-                    System.out.println(arreglo[0]);
-                    u.setUsuario(arreglo[0]);
-                    u.setUsuario(arreglo[1]);
+                if (linea == "relaciones"){
+                    System.out.println(arreglo[14]);
+                    u.setUsuario(arreglo[15]);
+                    u.setUsuario(arreglo[16]);
                 }
                 
                 
