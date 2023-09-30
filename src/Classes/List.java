@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto1;
+package Classes;
 
 /**
  *
@@ -26,7 +26,7 @@ public class List<T> { //Esta es una lista simple.
     }
     
     public void addEnd(T data){
-        Node<T> node = new Node<T>(data);
+        Node<T> node = new Node(data);
         
         if (this.isEmpty()) {
             this.pFirst = node;
@@ -38,6 +38,28 @@ public class List<T> { //Esta es una lista simple.
         size++;
     }
     
+ 
+    
+    
+    public T GetbyIndex(int index) {
+        Node<T> pAux = this.pFirst.getpNext();
+       
+        
+        if (this.size <= index) {
+            
+            return null;
+            
+        } else {
+            
+            for (int count = 1; count < index;count++) {
+            
+            pAux = pAux.getpNext();
+            }
+            return pAux.getData();
+        }
+            
+        
+    }
 
     public Node<T> getpFirst() {
         return pFirst;
