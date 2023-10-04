@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto1;
+package proyecto1.Grafo.Grafico;
 
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
-s
 
 /**
  *
- * @author fabys
+ * @Carlos Hernández
  */
 public class MostrarGrafo {
     

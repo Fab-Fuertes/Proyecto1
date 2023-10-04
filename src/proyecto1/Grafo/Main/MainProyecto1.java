@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto1;
+package proyecto1.Grafo.Main;
 
 /**
  *
  * @author fabys
  */
-public class Proyecto1 {
+public class MainProyecto1 {
 
     /**
      * @param args the command line arguments
