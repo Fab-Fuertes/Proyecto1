@@ -12,12 +12,10 @@ package proyecto1.Estructuras;
 public class Grafo {
     private NodoGrafo primero;
     private NodoGrafo ultimo;
-    private NodoGrafo siguiente;
     
     public Grafo(){
         primero = null;
         ultimo= null;
-        siguiente = null;
     }
     
     public boolean grafoVacio(){
@@ -49,5 +47,43 @@ public class Grafo {
             posicion.lista.nuevaAdyacencia(destino);
         }
     }
+    
+    public void NuevaArista (Object origen, Object destino, float peso){
+        if(existeVertice(origen)&& existeVertice(destino)){
+            NodoGrafo posicion= primero;
+            while(!posicion.dato.equals(origen.toString())){
+                posicion = posicion.siguiente;
+            }
+            posicion.lista.nuevaAdyacencia(destino, peso);
+        }
+    }
+    
+    public void nuevoNodo(Object dato){
+        if(!existeVertice(dato)){
+            NodoGrafo nodo = new NodoGrafo(dato);
+            if(grafoVacio()){
+                primero = nodo;
+                ultimo = nodo;
+            } else{
+                if(dato.toString().compareTo(primero.dato.toString())<=0){
+                    nodo.siguiente = primero;
+                    primero= nodo;
+                    
+                }else{
+                    if(dato.toString().compareTo(ultimo.dato.toString())>=0){
+                        ultimo.siguiente = nodo;
+                        ultimo = nodo;
+                    }else{
+                        NodoGrafo temporal = primero;
+                        while(dato.toString().compareTo(temporal.dato.toString())<0){
+                            temporal = temporal.siguiente;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
     
 }

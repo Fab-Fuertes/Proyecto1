@@ -10,5 +10,14 @@ package proyecto1.Estructuras;
  * @author fabys
  */
 public class NodoGrafo {
+    Object dato;
+    ListaAdyacencia lista;
+    NodoGrafo siguiente;
+    
+    public NodoGrafo(Object x){
+        dato = x;
+        lista = new ListaAdyacencia();
+        siguiente = null;
+    }
     
 }
