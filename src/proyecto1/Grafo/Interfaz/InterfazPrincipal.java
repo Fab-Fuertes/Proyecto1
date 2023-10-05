@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package proyecto1.Grafo.Interfaz;
+import proyecto1.Grafo.Usuarios;
+import proyecto1.Grafo.List;
+
+        
 
 import java.io.BufferedReader;
 import java.io.File;

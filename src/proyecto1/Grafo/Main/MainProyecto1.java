@@ -5,6 +5,8 @@
  */
 package proyecto1.Grafo.Main;
 
+import proyecto1.Grafo.Interfaz.InterfazPrincipal;
+
 /**
  *
  * @author fabys
