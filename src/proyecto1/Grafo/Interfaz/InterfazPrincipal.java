@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package proyecto1.Grafo.Interfaz;
-import proyecto1.Grafo.Usuarios;
-import proyecto1.Grafo.List;
+import proyecto1.Estructuras.Usuarios;
+import proyecto1.Estructuras.List;
 
         
 
