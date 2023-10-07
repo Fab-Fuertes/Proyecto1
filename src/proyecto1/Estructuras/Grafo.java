@@ -85,5 +85,18 @@ public class Grafo {
     }
     
     
+    public String toString(){
+        String cadena = "";
+        NodoGrafo temporal = primero;
+        while(temporal != null){
+            cadena = cadena +temporal.dato.toString()+" -> "+temporal.lista.toString()+"\n";
+            temporal= temporal.siguiente;
+            
+        
+        }
+        return cadena;
+    }
+    
+    
     
 }

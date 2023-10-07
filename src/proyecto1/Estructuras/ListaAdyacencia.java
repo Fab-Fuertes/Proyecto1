@@ -73,6 +73,18 @@ public class ListaAdyacencia {
         }
         return encontrado;
     }
+    
+    public String toString(){
+        String cadena= "";
+        Arco temporal = primero;
+        while(temporal != null){
+            cadena = cadena+ temporal.destino.toString()+ ";";
+            temporal = temporal.siguiente;
+        }
+        return cadena;
+        
+        
+    }
           
             
 }
