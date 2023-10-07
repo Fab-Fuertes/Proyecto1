@@ -7,7 +7,7 @@ public class MostrarGrafo {
     private MiArrayList<MiArrayList<Integer>> listaAdyacencia;
     private Grafo grafo;
 
-    MostrarGrafo(int numNodos) {
+    public MostrarGrafo(int numNodos) {
         this.numNodos = numNodos;
         listaAdyacencia = new MiArrayList<MiArrayList<Integer>>();
         for (int i = 0; i < numNodos; ++i)
