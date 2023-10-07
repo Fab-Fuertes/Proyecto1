@@ -6,7 +6,7 @@
 package proyecto1.Grafo.Interfaz;
 import proyecto1.Estructuras.Usuarios;
 import proyecto1.Estructuras.List;
-
+import proyecto1.Grafo.Grafico.MostrarGrafo;
         
 
 import java.io.BufferedReader;
@@ -23,12 +23,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class InterfazPrincipal extends javax.swing.JFrame {
 
     List usuarios = new List();
+    MostrarGrafo g;
     
     /**
      * Creates new form InterfazPrincipal
      */
     public InterfazPrincipal() {
         initComponents();
+        g = new MostrarGrafo(4); // Inicializa la instancia de GraficoGrafo
+        g.agregarAristaDirigida(0, 1);
+        g.agregarAristaDirigida(1, 2);
+        g.agregarAristaDirigida(2, 3);
+        g.agregarAristaDirigida(3, 0);
+        g.agregarAristaDirigidaConPeso(3, 4, 5);
     }
 
     /**
@@ -109,7 +116,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        g.mostrarGrafo(); // Llama al método mostrarGrafo() cuando se presiona el botón
     }//GEN-LAST:event_jButton2ActionPerformed
 
     

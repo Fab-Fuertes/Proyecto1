@@ -1,40 +1,44 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyecto1.Grafo.Grafico;
 
+import proyecto1.Estructuras.Grafo;
 
-import java.util.ArrayList;
-
-public class GraficoGrafo {
+public class MostrarGrafo {
     private int numNodos;
-    private ArrayList<ArrayList<Integer>> listaAdyacencia;
+    private MiArrayList<MiArrayList<Integer>> listaAdyacencia;
+    private Grafo grafo;
 
-    GraficoGrafo(int numNodos) {
+    public MostrarGrafo(int numNodos) {
         this.numNodos = numNodos;
-        listaAdyacencia = new ArrayList<ArrayList<Integer>>(numNodos);
+        listaAdyacencia = new MiArrayList<MiArrayList<Integer>>();
         for (int i = 0; i < numNodos; ++i)
-            listaAdyacencia.add(new ArrayList<Integer>());
+            listaAdyacencia.add(new MiArrayList<Integer>());
+        grafo = new Grafo();
     }
 
     public void agregarAristaDirigida(int origen, int destino) {
         listaAdyacencia.get(origen).add(destino);
+        grafo.NuevoArco(origen, destino);
+    }
+
+    public void agregarAristaDirigidaConPeso(int origen, int destino, float peso) {
+        listaAdyacencia.get(origen).add(destino);
+        grafo.NuevaArista(origen, destino, peso);
     }
 
     public void mostrarGrafo() {
         for (int nodo = 0; nodo < numNodos; ++nodo) {
-            System.out.print("Nodo " + nodo + ": ");
-            for (Integer destino : listaAdyacencia.get(nodo)) {
-                System.out.print(nodo + "->" + destino + " ");
-            }
-            System.out.println();
+        System.out.print("Nodo " + nodo + ": ");
+        MiArrayList<Integer> destinos = listaAdyacencia.get(nodo);
+        for (int i = 0; i < destinos.size(); ++i) {
+            Integer destino = destinos.get(i);
+            System.out.print(nodo + "->" + destino + " ");
         }
+        System.out.println();
+       }
     }
-
+   
     public static void main(String[] args) {
-        GraficoGrafo g = new GraficoGrafo(4);
+        MostrarGrafo g = new MostrarGrafo(4);
         g.agregarAristaDirigida(0, 1);
         g.agregarAristaDirigida(1, 2);
         g.agregarAristaDirigida(2, 3);
@@ -44,21 +48,20 @@ public class GraficoGrafo {
 }
 
 //EXPLICACIÓN DEL CÓDIGO:
-//Este código es una implementación de un grafo dirigido utilizando la clase ArrayList.
-//
-//En la línea 5, se define la clase GraficoGrafo con tres campos: numNodos, que representa el número de 
-//nodos en el grafo; listaAdyacencia, que es una lista de adyacencia que almacena las aristas del grafo; 
-//y un constructor que inicializa los campos.
-//
-//En el constructor, se inicializa el campo numNodos con el valor pasado como argumento y se crea una lista
-//de adyacencia vacía para cada nodo del grafo.
-//
-//El método agregarAristaDirigida agrega una arista dirigida desde el nodo origen al nodo destino en la 
-//lista de adyacencia correspondiente.
-//
-//El método mostrarGrafo muestra la lista de adyacencia para cada nodo del grafo. Para cada nodo, se imprime
-//su número seguido de una lista de los nodos a los que está conectado.
-//
-//En el método main, se crea un objeto de la clase GraficoGrafo con 4 nodos. Luego, se agregan cuatro 
-//aristas dirigidas al grafo y se llama al método mostrarGrafo para mostrar la lista de adyacencia para 
-//cada nodo del grafo.
+
+//1. `package proyecto.Grafos.Grafico;` - Define el paquete en el que se encuentra tu clase.
+//2. `import proyecto.Estructuras.Grafo;` - Importa la clase Grafo de otro paquete.
+//3. `public class GraficoGrafo {` - Define la clase pública `GraficoGrafo`.
+//4. `private int numNodos;` - Declara una variable privada `numNodos` para almacenar el número de nodos en 
+//el grafo.
+//5. `private MiArrayList<MiArrayList<Integer>> listaAdyacencia;` - Declara una lista de adyacencia para 
+//representar el grafo.
+//6. `private Grafo grafo;` - Declara una variable privada `grafo` de tipo `Grafo`.
+//7. `GraficoGrafo(int numNodos) {...}` - Define el constructor de la clase que inicializa las variables miembro.
+//8. `public void agregarAristaDirigida(int origen, int destino) {...}` - Define un método para 
+//agregar una arista dirigida al grafo.
+//9. `public void agregarAristaDirigidaConPeso(int origen, int destino, float peso) {...}` - Define un método 
+//para agregar una arista dirigida con peso al grafo.
+//10. `public void mostrarGrafo() {...}` - Define un método para imprimir el grafo en la consola.
+//11. `public static void main(String[] args) {...}` - Define el método principal que se ejecuta al iniciar 
+//el programa.
