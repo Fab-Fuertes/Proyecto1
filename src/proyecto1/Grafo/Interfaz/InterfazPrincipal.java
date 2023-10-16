@@ -31,6 +31,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     public InterfazPrincipal() {
         initComponents();
         setTitle("Menu");
+        
+        
+        
         g = new MostrarGrafo(4); // Inicializa la instancia de GraficoGrafo
         g.agregarAristaDirigida(0, 1);
         g.agregarAristaDirigida(1, 2);
