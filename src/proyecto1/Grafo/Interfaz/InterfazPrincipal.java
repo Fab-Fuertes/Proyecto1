@@ -33,13 +33,13 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         setTitle("Menu");
         
         
-        
-        g = new MostrarGrafo(4); // Inicializa la instancia de GraficoGrafo
-        g.agregarAristaDirigida(0, 1);
-        g.agregarAristaDirigida(1, 2);
-        g.agregarAristaDirigida(2, 3);
-        g.agregarAristaDirigida(3, 0);
-        g.agregarAristaDirigidaConPeso(3, 4, 5);
+        System.setProperty("org.graphstream.ui", "swing");
+        g = new MostrarGrafo(); // Inicializa la instancia de GraficoGrafo con 5 nodos
+        g.agregarAristaDirigida("0", "1");
+        g.agregarAristaDirigida("1", "2");
+        g.agregarAristaDirigida("2", "4");
+        g.agregarAristaDirigida("4", "6");
+        g.agregarAristaDirigida("6", "0");
     }
 
     /**
