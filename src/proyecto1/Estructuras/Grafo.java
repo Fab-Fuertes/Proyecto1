@@ -22,6 +22,11 @@ public class Grafo {
         return primero == null;
     }
     
+    /**
+     * 
+     * @param dato 
+     * @return 
+     */
     public boolean existeVertice(Object dato){
         boolean existe = false;
         if(!grafoVacio()){
@@ -37,6 +42,11 @@ public class Grafo {
         return existe;
     }
     
+    /**
+     * 
+     * @param origen
+     * @param destino 
+     */
     public void NuevoArco(Object origen, Object destino){
         if(existeVertice(origen) && existeVertice(destino)){
             NodoGrafo posicion = primero;
@@ -48,15 +58,15 @@ public class Grafo {
         }
     }
     
-    public void NuevaArista (Object origen, Object destino, float peso){
-        if(existeVertice(origen)&& existeVertice(destino)){
-            NodoGrafo posicion= primero;
-            while(!posicion.dato.equals(origen.toString())){
-                posicion = posicion.siguiente;
-            }
-            posicion.lista.nuevaAdyacencia(destino, peso);
-        }
-    }
+  //  public void NuevaArista (Object origen, Object destino, float peso){
+    //    if(existeVertice(origen)&& existeVertice(destino)){
+        //    NodoGrafo posicion= primero;
+      //      while(!posicion.dato.equals(origen.toString())){
+     //           posicion = posicion.siguiente;
+       //     }
+     //       posicion.lista.nuevaAdyacencia(destino, peso);
+     //   }
+   // }
     
     public void nuevoNodo(Object dato){
         if(!existeVertice(dato)){
