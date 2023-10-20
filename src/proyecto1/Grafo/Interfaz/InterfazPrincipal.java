@@ -7,6 +7,10 @@ package proyecto1.Grafo.Interfaz;
 import proyecto1.Estructuras.Usuarios;
 import proyecto1.Estructuras.List;
 import proyecto1.Grafo.Grafico.MostrarGrafo;
+import proyecto1.Estructuras.ListaAdyacencia;
+import proyecto1.Estructuras.Grafo;
+import proyecto1.Estructuras.Arco;
+import proyecto1.Estructuras.NodoGrafo;
         
 
 import java.io.BufferedReader;
@@ -22,8 +26,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class InterfazPrincipal extends javax.swing.JFrame {
 
-    List usuarios = new List();
-    MostrarGrafo g;
+    ListaAdyacencia lista = new ListaAdyacencia();
+    MostrarGrafo grafo;
     
     /**
      * Creates new form InterfazPrincipal
@@ -34,12 +38,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         
         
         System.setProperty("org.graphstream.ui", "swing");
-        g = new MostrarGrafo(); // Inicializa la instancia de GraficoGrafo con 5 nodos
-        g.agregarAristaDirigida("0", "1");
-        g.agregarAristaDirigida("1", "2");
-        g.agregarAristaDirigida("2", "4");
-        g.agregarAristaDirigida("4", "6");
-        g.agregarAristaDirigida("6", "0");
+        grafo = new MostrarGrafo(); // Inicializa la instancia de GraficoGrafo con 5 nodos
+        grafo.agregarAristaDirigida("0", "1");
+        grafo.agregarAristaDirigida("1", "2");
+        grafo.agregarAristaDirigida("2", "4");
+        grafo.agregarAristaDirigida("4", "6");
+        grafo.agregarAristaDirigida("6", "0");
     }
 
     /**
@@ -132,7 +136,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        g.mostrarGrafo(); // Llama al método mostrarGrafo() cuando se presiona el botón
+        grafo.mostrarGrafo(); // Llama al método mostrarGrafo() cuando se presiona el botón
     }//GEN-LAST:event_jButton2ActionPerformed
 
     
@@ -177,7 +181,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 }
                 
                 
-                usuarios.addEnd(u);
+                lista.nuevaAdyacencia(u);
             }
             
             
@@ -198,11 +202,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         
     }
     
-    
-    
-    
-    
-    
+   
+
     
     
     /**

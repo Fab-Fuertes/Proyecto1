@@ -6,13 +6,15 @@
 package proyecto1.Grafo.Interfaz;
 import javax.swing.JOptionPane;
 import proyecto1.Estructuras.Grafo;
+import proyecto1.Grafo.Grafico.MostrarGrafo;
+
 
 /**
  *
  * @author fabys
  */
 public class InsertarNodo extends javax.swing.JFrame {
-    Grafo grafo = new Grafo();
+    //Grafo grafo = new Grafo();
 
     /**
      * Creates new form InsertarNodo
@@ -112,23 +114,25 @@ public class InsertarNodo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EntradaActionPerformed
 
+           
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String origen = "";
         String destino ="";
         origen = JOptionPane.showInputDialog("Origen:");
         destino = JOptionPane.showInputDialog("Destino:");
-        if (grafo.existeVertice(origen) && grafo.existeVertice(destino)){
-            grafo.NuevoArco(origen, destino);
+        if (MostrarGrafo.grafo.existeVertice(origen) && MostrarGrafo.grafo.existeVertice(destino)){
+            MostrarGrafo.grafo.NuevoArco(origen, destino);
         }
-        Salida.setText(grafo.toString());
+        Salida.setText(MostrarGrafo.grafo.toString());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String dato = Entrada.getText();
-        grafo.nuevoNodo(dato);
-        Salida.setText(grafo.toString());
+        MostrarGrafo.grafo.nuevoNodo(dato);
+        Salida.setText(MostrarGrafo.grafo.toString());
         Entrada.setText("");
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -139,7 +143,8 @@ public class InsertarNodo extends javax.swing.JFrame {
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    
+    
     /**
      * @param args the command line arguments
      */

@@ -18,7 +18,7 @@ import org.graphstream.graph.implementations.*;
 
 
 public class MostrarGrafo {
-    private Grafo grafo;
+    public static Grafo grafo;
     private Graph graph;
 
     public MostrarGrafo() {
@@ -45,12 +45,12 @@ public class MostrarGrafo {
     }
    
     public static void main(String[] args) {
-        MostrarGrafo g = new MostrarGrafo();
-        g.agregarAristaDirigida("0", "1");
-        g.agregarAristaDirigida("1", "2");
-        g.agregarAristaDirigida("2", "3");
-        g.agregarAristaDirigida("3", "0");
-        g.mostrarGrafo();
+        MostrarGrafo grafo = new MostrarGrafo();
+        grafo.agregarAristaDirigida("0", "1");
+        grafo.agregarAristaDirigida("1", "2");
+        grafo.agregarAristaDirigida("2", "3");
+        grafo.agregarAristaDirigida("3", "0");
+        grafo.mostrarGrafo();
     }
     
     

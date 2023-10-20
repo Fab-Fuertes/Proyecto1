@@ -11,7 +11,7 @@ import proyecto1.Grafo.Interfaz.InterfazPrincipal;
  *
  * @author fabys
  */
-public class MainProyecto1 {
+public class Main {
 
     /**
      * @param args the command line arguments
