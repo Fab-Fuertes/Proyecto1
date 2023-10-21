@@ -64,7 +64,7 @@ public class Grafo {
       //      while(!posicion.dato.equals(origen.toString())){
      //           posicion = posicion.siguiente;
        //     }
-     //       posicion.lista.nuevaAdyacencia(destino, peso);
+     //       posicion.lista.nuevaAdyacenciaObject(destino, peso);
      //   }
    // }
     
@@ -92,6 +92,22 @@ public class Grafo {
                 }
             }
         }
+    }
+
+    public NodoGrafo getPrimero() {
+        return primero;
+    }
+
+    public void setPrimero(NodoGrafo primero) {
+        this.primero = primero;
+    }
+
+    public NodoGrafo getUltimo() {
+        return ultimo;
+    }
+
+    public void setUltimo(NodoGrafo ultimo) {
+        this.ultimo = ultimo;
     }
     
     

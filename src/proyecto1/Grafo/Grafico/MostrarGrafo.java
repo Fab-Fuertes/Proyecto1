@@ -43,6 +43,23 @@ public class MostrarGrafo {
         System.out.println(grafo.toString());
         graph.display();
     }
+
+    public static Grafo getGrafo() {
+        return grafo;
+    }
+
+    public static void setGrafo(Grafo grafo) {
+        MostrarGrafo.grafo = grafo;
+    }
+
+    public Graph getGraph() {
+        return graph;
+    }
+
+    public void setGraph(Graph graph) {
+        this.graph = graph;
+    }
+    
    
     public static void main(String[] args) {
         MostrarGrafo grafo = new MostrarGrafo();

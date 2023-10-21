@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package proyecto1.Grafo.Interfaz;
+
 import proyecto1.Estructuras.Usuarios;
 import proyecto1.Estructuras.List;
 import proyecto1.Grafo.Grafico.MostrarGrafo;
@@ -11,14 +12,12 @@ import proyecto1.Estructuras.ListaAdyacencia;
 import proyecto1.Estructuras.Grafo;
 import proyecto1.Estructuras.Arco;
 import proyecto1.Estructuras.NodoGrafo;
-        
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 
 /**
  *
@@ -28,22 +27,18 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     ListaAdyacencia lista = new ListaAdyacencia();
     MostrarGrafo grafo;
-    
+    List<String[]> lista_relaciones = new List<String[]>();
+
     /**
      * Creates new form InterfazPrincipal
      */
     public InterfazPrincipal() {
         initComponents();
         setTitle("Menu");
-        
-        
+
         System.setProperty("org.graphstream.ui", "swing");
         grafo = new MostrarGrafo(); // Inicializa la instancia de GraficoGrafo con 5 nodos
-        grafo.agregarAristaDirigida("0", "1");
-        grafo.agregarAristaDirigida("1", "2");
-        grafo.agregarAristaDirigida("2", "4");
-        grafo.agregarAristaDirigida("4", "6");
-        grafo.agregarAristaDirigida("6", "0");
+
     }
 
     /**
@@ -118,20 +113,19 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    
-    
+
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         JFileChooser seleccionarArchivo = new JFileChooser();
         FileNameExtensionFilter filtroArchivo = new FileNameExtensionFilter("txt", "txt");
         seleccionarArchivo.setFileFilter(filtroArchivo);
         int seleccion = seleccionarArchivo.showOpenDialog(this);
-        
-        if (seleccion == JFileChooser.APPROVE_OPTION){
+
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
             File Archivo = seleccionarArchivo.getSelectedFile();
             cargarArchivo(Archivo);
-            
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -139,8 +133,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         grafo.mostrarGrafo(); // Llama al método mostrarGrafo() cuando se presiona el botón
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    
-    
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         VentanaModificarGrafo a = new VentanaModificarGrafo();
@@ -148,64 +141,63 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    public void cargarArchivo (File Archivo){
+    public void cargarArchivo(File Archivo) {
         FileReader fr = null;
         BufferedReader br = null;
-        
-        try{
+
+        try {
             fr = new FileReader(Archivo);
             br = new BufferedReader(fr);
-            
+
             String linea;
             int relaciones = 0;
-            
-            while ((linea= br.readLine())!= null){
+
+            while ((linea = br.readLine()) != null) {
                 Usuarios u = new Usuarios();
-                
+
                 String arreglo[] = linea.split(",");
                 //String arreglo2[] = linea.split(",");
-                if (relaciones ==0){
+                if (relaciones == 0) {
                     System.out.println(arreglo[0]);
-                    u.setUsuario(arreglo[0]);
-                    
-                    if (linea. equals("relaciones")){
-                        relaciones ++;
+                    if (!linea.equals("usuarios") && !linea.equals("relaciones")) {
+                        u.setUsuario(linea);
+                        grafo.getGraph().addNode(linea);
+                        grafo.getGrafo().nuevoNodo(linea);
                     }
-                    
-                
-                }else{
+                    if (linea.equals("relaciones")) {
+                        relaciones++;
+                    }
+
+                } else {
+
                     System.out.println(arreglo[0] + "," + arreglo[1]);
-                    u.setUsuario(arreglo[0]);
-                    u.setUsuario(arreglo[1]);
-                    
+                    String origen = arreglo[0];
+                    String destino = arreglo[1].replaceAll(" ", "");
+
+                    lista_relaciones.addEnd(arreglo);
+                    grafo.getGrafo().NuevoArco(origen, destino);
+                    grafo.getGraph().addEdge(origen + "-" + destino, origen, destino, true);
+
                 }
-                
-                
+
                 lista.nuevaAdyacencia(u);
             }
-            
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
-            
-        }
-        finally{
-            try{
-                if (fr != null){
+
+        } finally {
+            try {
+                if (fr != null) {
                     fr.close();
                 }
-            }
-            catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        
-    }
-    
-   
 
-    
-    
+    }
+
     /**
      * @param args the command line arguments
      */
