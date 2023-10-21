@@ -52,6 +52,11 @@ public class ListaAdyacencia {
                     ultimo = nodo;
                 }else{
                     Arco posicion = primero;
+                    while(destino.toString().compareTo(posicion.destino.toString())>0){
+                        posicion = posicion.siguiente;
+                    }
+                        nodo.siguiente = posicion.siguiente;
+                        posicion.siguiente = nodo;
                     
                         
                     }
@@ -83,6 +88,40 @@ public class ListaAdyacencia {
         }
         return cadena;
         
+        
+    }
+    
+    public void eliminarAdyacencia(Object dato){
+        if(!listaVacia() && this.adyacente(dato)){
+            if (this.primero == this.ultimo){
+                this.primero = null;
+                this.ultimo = null;
+            }else{
+                Arco pActual= this.primero;
+                Arco pAnterior = null;
+                while(pActual != null && dato.toString().compareTo(pActual.destino.toString())>0){
+                    pAnterior =pActual;
+                    pActual = pActual.siguiente;
+                    if (pActual == this.primero){
+                        Arco nodoEliminar = this.primero;
+                        this.primero = this.primero.siguiente;
+                        nodoEliminar.siguiente = null;
+                        
+                    } else{
+                        if(pActual == this.ultimo){
+                            pAnterior.siguiente = null;
+                            this.ultimo = pAnterior;
+                        }else{
+                            pAnterior.siguiente=pActual.siguiente;
+                            pActual.siguiente= null;
+                        }
+                    }
+                }
+                    
+                       
+            }
+            
+        }
         
     }
           
