@@ -35,6 +35,7 @@ public class MostrarGrafo {
             grafo.nuevoNodo(destino);
             graph.addNode(destino);
         }
+        
         grafo.NuevoArco(origen, destino);
         graph.addEdge(origen + "-" + destino, origen, destino, true);
     }
