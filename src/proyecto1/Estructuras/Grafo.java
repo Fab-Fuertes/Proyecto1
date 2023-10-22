@@ -93,6 +93,18 @@ public class Grafo {
             }
         }
     }
+    
+    public void eliminarArco(Object origen, Object destino){
+        if(this.existeVertice(origen) && this.existeVertice(destino)){
+            NodoGrafo posicion = this.primero;
+            while(posicion.dato != origen){
+                posicion = posicion.siguiente;
+                posicion.lista.eliminarAdyacencia(destino);
+            }
+            
+        }
+        
+    }
 
     public NodoGrafo getPrimero() {
         return primero;
