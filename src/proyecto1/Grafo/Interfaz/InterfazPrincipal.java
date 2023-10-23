@@ -16,8 +16,12 @@ import proyecto1.Estructuras.NodoGrafo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.graphstream.graph.Node;
 
 /**
  *
@@ -26,8 +30,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class InterfazPrincipal extends javax.swing.JFrame {
 
     ListaAdyacencia lista = new ListaAdyacencia();
-    MostrarGrafo grafo;
+      MostrarGrafo grafo;
     List<String[]> lista_relaciones = new List<String[]>();
+    File archivo;
 
     /**
      * Creates new form InterfazPrincipal
@@ -124,6 +129,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         if (seleccion == JFileChooser.APPROVE_OPTION) {
             File Archivo = seleccionarArchivo.getSelectedFile();
+            archivo = Archivo;
             cargarArchivo(Archivo);
 
         }
@@ -136,7 +142,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        VentanaModificarGrafo a = new VentanaModificarGrafo();
+        VentanaModificarGrafo a = new VentanaModificarGrafo(grafo);
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -197,7 +203,32 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
 
     }
+    
+    public void modificarArchivo(MostrarGrafo grafo) throws IOException{ 
+        FileWriter f = new FileWriter(archivo);
+        PrintWriter w = new PrintWriter(f);
+        NodoGrafo aux = grafo.getGrafo().getPrimero();
+        w.write("usuarios" + "\n");
+        
+        while(aux!=null){
+            w.write(aux.dato.toString()+"\n");
+                        System.out.println(aux.dato);
 
+            aux = aux.siguiente;
+        }
+        w.write("relaciones" + "\n");
+        
+        proyecto1.Estructuras.Node<String[]> primero = lista_relaciones.getpFirst();
+        
+        while(primero!=null){
+            w.write(primero.toString());
+            System.out.println();primero.toString();
+            primero = primero.getpNext();
+        }
+        w.close();
+
+        
+    }
     /**
      * @param args the command line arguments
      */

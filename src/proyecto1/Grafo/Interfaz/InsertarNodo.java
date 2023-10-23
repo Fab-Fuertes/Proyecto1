@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package proyecto1.Grafo.Interfaz;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proyecto1.Estructuras.Grafo;
 import proyecto1.Grafo.Grafico.MostrarGrafo;
@@ -14,14 +17,18 @@ import proyecto1.Grafo.Grafico.MostrarGrafo;
  * @author fabys
  */
 public class InsertarNodo extends javax.swing.JFrame {
-    //Grafo grafo = new Grafo();
-    //MostrarGrafo grafo;
+    Grafo grafo = new Grafo();
+    public static MostrarGrafo mostrar;
+    InterfazPrincipal interfaz;
+    
 
     /**
      * Creates new form InsertarNodo
      */
-    public InsertarNodo() {
+    public InsertarNodo(MostrarGrafo grafo) {
         initComponents();
+        mostrar = grafo;
+        
     }
 
     /**
@@ -123,11 +130,9 @@ public class InsertarNodo extends javax.swing.JFrame {
         String destino ="";
         origen = JOptionPane.showInputDialog("Origen:");
         destino = JOptionPane.showInputDialog("Destino:");
-        if (MostrarGrafo.grafo.existeVertice(origen) && MostrarGrafo.grafo.existeVertice(destino)){
-            MostrarGrafo.grafo.NuevoArco(origen, destino);
-
-            
-           
+        if (mostrar.getGrafo().existeVertice(origen) && mostrar.getGrafo().existeVertice(destino)){
+            mostrar.getGrafo().NuevoArco(origen, destino);
+            mostrar.getGraph().addEdge(origen + "-" + destino, origen, destino, true);
         }
         Salida.setText(MostrarGrafo.grafo.toString());
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -135,15 +140,21 @@ public class InsertarNodo extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String dato = Entrada.getText();
-        MostrarGrafo.grafo.nuevoNodo(dato);
-        Salida.setText(MostrarGrafo.grafo.toString());
+        mostrar.getGrafo().nuevoNodo(dato);
+        mostrar.getGraph().addNode(dato);
+        Salida.setText(mostrar.getGrafo().toString());
         Entrada.setText("");
+        try {
+            interfaz.modificarArchivo(mostrar);
+        } catch (IOException ex) {
+            Logger.getLogger(InsertarNodo.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        VentanaModificarGrafo a = new VentanaModificarGrafo();
+        VentanaModificarGrafo a = new VentanaModificarGrafo(mostrar);
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -179,7 +190,7 @@ public class InsertarNodo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InsertarNodo().setVisible(true);
+                new InsertarNodo(mostrar).setVisible(true);
             }
         });
     }

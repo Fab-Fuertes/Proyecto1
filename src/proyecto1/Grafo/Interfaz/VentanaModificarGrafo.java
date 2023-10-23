@@ -5,17 +5,20 @@
  */
 package proyecto1.Grafo.Interfaz;
 
+import proyecto1.Grafo.Grafico.MostrarGrafo;
+
 /**
  *
  * @author fabys
  */
 public class VentanaModificarGrafo extends javax.swing.JFrame {
-
+    public static MostrarGrafo graph;
     /**
      * Creates new form VentanaModificarGrafo
      */
-    public VentanaModificarGrafo() {
+    public VentanaModificarGrafo(MostrarGrafo grafo) {
         initComponents();
+        graph = grafo;
         setTitle("Modificar grafo");
     }
 
@@ -88,14 +91,14 @@ public class VentanaModificarGrafo extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        InsertarNodo a = new InsertarNodo();
+        InsertarNodo a = new InsertarNodo(graph);
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        // TODO add your handling code here:
-        EliminarNodo a = new EliminarNodo();
+        EliminarNodo a = new EliminarNodo(graph);
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -103,6 +106,7 @@ public class VentanaModificarGrafo extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         InterfazPrincipal a = new InterfazPrincipal();
+        a.grafo = graph;
         a.setVisible(true);
         this.setVisible(false);
         
@@ -138,7 +142,7 @@ public class VentanaModificarGrafo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaModificarGrafo().setVisible(true);
+                new VentanaModificarGrafo(graph).setVisible(true);
             }
         });
     }

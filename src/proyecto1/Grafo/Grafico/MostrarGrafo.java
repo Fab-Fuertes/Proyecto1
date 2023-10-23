@@ -35,11 +35,11 @@ public class MostrarGrafo {
         graph.display();
     }
 
-    public static Grafo getGrafo() {
+    public Grafo getGrafo() {
         return grafo;
     }
 
-    public static void setGrafo(Grafo grafo) {
+    public void setGrafo(Grafo grafo) {
         MostrarGrafo.grafo = grafo;
     }
 

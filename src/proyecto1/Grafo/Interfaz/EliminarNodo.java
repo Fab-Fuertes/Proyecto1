@@ -5,17 +5,20 @@
  */
 package proyecto1.Grafo.Interfaz;
 
+import proyecto1.Grafo.Grafico.MostrarGrafo;
+
 /**
  *
  * @author fabys
  */
 public class EliminarNodo extends javax.swing.JFrame {
-
+    public static MostrarGrafo grafo;
     /**
      * Creates new form EliminarNodo
      */
-    public EliminarNodo() {
+    public EliminarNodo(MostrarGrafo g) {
         initComponents();
+        grafo = g;
         setTitle("Eliminar");
     }
 
@@ -83,13 +86,14 @@ public class EliminarNodo extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        VentanaModificarGrafo a = new VentanaModificarGrafo();
+        VentanaModificarGrafo a = new VentanaModificarGrafo(grafo);
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
@@ -122,7 +126,7 @@ public class EliminarNodo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EliminarNodo().setVisible(true);
+                new EliminarNodo(grafo).setVisible(true);
             }
         });
     }

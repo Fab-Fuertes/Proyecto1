@@ -11,7 +11,7 @@ package proyecto1.Estructuras;
  */
 public class ListaAdyacencia {
 
-    Arco primero;
+    public Arco primero;
     Arco ultimo;
 
     public ListaAdyacencia() {
