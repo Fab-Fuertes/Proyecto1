@@ -5,16 +5,6 @@ import proyecto1.Estructuras.Grafo;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
 
-//Para utilizar org.graphstream.graph.* y org.graphstream.graph.implementations.* en tu proyecto de Java,
-//necesitas descargar e instalar la biblioteca GraphStream. Pasos a seguir:
-//
-//Descarga la biblioteca GraphStream desde su página oficial1 o desde su página de GitHub2. 
-//La biblioteca viene con un archivo JAR preempaquetado llamado gs-core.jar3.
-//
-//Añade el archivo JAR a tu classpath.
-//
-//Una vez que hayas añadido la biblioteca a tu proyecto, podrás importar y utilizar las clases de GraphStream en 
-//tu código.
 
 
 public class MostrarGrafo {
