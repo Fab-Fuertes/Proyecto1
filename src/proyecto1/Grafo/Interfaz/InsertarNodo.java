@@ -15,6 +15,7 @@ import proyecto1.Grafo.Grafico.MostrarGrafo;
  */
 public class InsertarNodo extends javax.swing.JFrame {
     //Grafo grafo = new Grafo();
+    //MostrarGrafo grafo;
 
     /**
      * Creates new form InsertarNodo
@@ -124,6 +125,9 @@ public class InsertarNodo extends javax.swing.JFrame {
         destino = JOptionPane.showInputDialog("Destino:");
         if (MostrarGrafo.grafo.existeVertice(origen) && MostrarGrafo.grafo.existeVertice(destino)){
             MostrarGrafo.grafo.NuevoArco(origen, destino);
+
+            
+           
         }
         Salida.setText(MostrarGrafo.grafo.toString());
     }//GEN-LAST:event_jButton2ActionPerformed
