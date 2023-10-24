@@ -137,6 +137,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         grafo.mostrarGrafo(); // Llama al método mostrarGrafo() cuando se presiona el botón
+        grafo.mostrarComponentesFuertementeConectados();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
