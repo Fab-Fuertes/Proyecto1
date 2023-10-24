@@ -132,10 +132,10 @@ public class Grafo {
         }
         return cadena;
     }
-    
-        private NodoGrafo buscarNodo(Object dato) {
+
+    private NodoGrafo buscarNodo(Object dato) {
         NodoGrafo temp = primero;
-        while(temp != null){
+        while (temp != null) {
             if (temp.dato.equals(dato)) {
                 return temp;
             }
@@ -146,7 +146,7 @@ public class Grafo {
 
     public void agregarAristaDirigida(Object origen, Object destino) {
         NodoGrafo nodoOrigen = buscarNodo(origen);
-        if(nodoOrigen != null){
+        if (nodoOrigen != null) {
             nodoOrigen.lista.nuevaAdyacencia(destino);
         }
     }
@@ -159,8 +159,6 @@ public class Grafo {
         }
         return false;
     }
-
-        
 
     public String[][] kosaraju() {
         Stack<NodoGrafo> stack = new Stack<>();
@@ -246,4 +244,3 @@ public class Grafo {
     }
 
 }
-

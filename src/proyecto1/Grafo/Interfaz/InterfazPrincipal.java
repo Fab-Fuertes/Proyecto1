@@ -12,7 +12,6 @@ import proyecto1.Estructuras.ListaAdyacencia;
 import proyecto1.Estructuras.Grafo;
 import proyecto1.Estructuras.Arco;
 import proyecto1.Estructuras.NodoGrafo;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -20,6 +19,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.graphstream.graph.Node;
 
@@ -30,7 +30,7 @@ import org.graphstream.graph.Node;
 public class InterfazPrincipal extends javax.swing.JFrame {
 
     ListaAdyacencia lista = new ListaAdyacencia();
-      MostrarGrafo grafo;
+    MostrarGrafo grafo;
     List<String[]> lista_relaciones = new List<String[]>();
     File archivo;
 
@@ -136,8 +136,15 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        grafo.mostrarGrafo(); // Llama al método mostrarGrafo() cuando se presiona el botón
-        grafo.mostrarComponentesFuertementeConectados();
+
+        if (this.ArchivoApto(archivo) == true) {
+
+            grafo.mostrarGrafo(); // Llama al método mostrarGrafo() cuando se presiona el botón
+            grafo.mostrarComponentesFuertementeConectados();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Ningun Archivo detectado!!", "WARNING", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -148,88 +155,128 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    public void cargarArchivo(File Archivo) {
-        FileReader fr = null;
-        BufferedReader br = null;
-
-        try {
-            fr = new FileReader(Archivo);
-            br = new BufferedReader(fr);
-
-            String linea;
-            int relaciones = 0;
-
-            while ((linea = br.readLine()) != null) {
-                Usuarios u = new Usuarios();
-
-                String arreglo[] = linea.split(",");
-                //String arreglo2[] = linea.split(",");
-                if (relaciones == 0) {
-                    System.out.println(arreglo[0]);
-                    if (!linea.equals("usuarios") && !linea.equals("relaciones")) {
-                        u.setUsuario(linea);
-                        grafo.getGraph().addNode(linea);
-                        grafo.getGrafo().nuevoNodo(linea);
-                    }
-                    if (linea.equals("relaciones")) {
-                        relaciones++;
-                    }
-
-                } else {
-
-                    System.out.println(arreglo[0] + "," + arreglo[1]);
-                    String origen = arreglo[0];
-                    String destino = arreglo[1].replaceAll(" ", "");
-
-                    lista_relaciones.addEnd(arreglo);
-                    grafo.getGrafo().NuevoArco(origen, destino);
-                    grafo.getGraph().addEdge(origen + "-" + destino, origen, destino, true);
-
-                }
-
-                lista.nuevaAdyacencia(u);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        } finally {
+    public boolean ArchivoApto(File Archivo) {
+        if (Archivo != null) {
+            FileReader fr = null;
+            BufferedReader br = null;
             try {
-                if (fr != null) {
-                    fr.close();
+                fr = new FileReader(Archivo);
+                br = new BufferedReader(fr);
+                String linea;
+
+                if (!(linea = br.readLine()).equals("usuarios")) {
+
+                    return false;
+
                 }
+
             } catch (Exception e) {
                 e.printStackTrace();
-            }
-        }
 
+            } finally {
+                try {
+                    if (fr != null) {
+                        fr.close();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return true;
+        }
+        return false;
     }
-    
-    public void modificarArchivo(MostrarGrafo grafo) throws IOException{ 
+
+    public void cargarArchivo(File Archivo) {
+
+        if (this.ArchivoApto(Archivo) == true) {
+
+            FileReader fr = null;
+            BufferedReader br = null;
+
+            try {
+                fr = new FileReader(Archivo);
+                br = new BufferedReader(fr);
+
+                String linea;
+                int relaciones = 0;
+
+                while ((linea = br.readLine()) != null) {
+
+                    Usuarios u = new Usuarios();
+
+                    String arreglo[] = linea.split(",");
+                    //String arreglo2[] = linea.split(",");
+                    if (relaciones == 0) {
+                        System.out.println(arreglo[0]);
+                        if (!linea.equals("usuarios") && !linea.equals("relaciones")) {
+                            u.setUsuario(linea);
+                            grafo.getGraph().addNode(linea);
+                            grafo.getGrafo().nuevoNodo(linea);
+                        }
+                        if (linea.equals("relaciones")) {
+                            relaciones++;
+                        }
+
+                    } else {
+
+                        System.out.println(arreglo[0] + "," + arreglo[1]);
+                        String origen = arreglo[0];
+                        String destino = arreglo[1].replaceAll(" ", "");
+
+                        lista_relaciones.addEnd(arreglo);
+                        grafo.getGrafo().NuevoArco(origen, destino);
+                        grafo.getGraph().addEdge(origen + "-" + destino, origen, destino, true);
+
+                    }
+
+                    lista.nuevaAdyacencia(u);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            } finally {
+                try {
+                    if (fr != null) {
+                        fr.close();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Archivo Inválido!!", "InvalidInputException", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void modificarArchivo(MostrarGrafo grafo) throws IOException {
         FileWriter f = new FileWriter(archivo);
         PrintWriter w = new PrintWriter(f);
         NodoGrafo aux = grafo.getGrafo().getPrimero();
         w.write("usuarios" + "\n");
-        
-        while(aux!=null){
-            w.write(aux.dato.toString()+"\n");
-                        System.out.println(aux.dato);
+
+        while (aux != null) {
+            w.write(aux.dato.toString() + "\n");
+            System.out.println(aux.dato);
 
             aux = aux.siguiente;
         }
         w.write("relaciones" + "\n");
-        
+
         proyecto1.Estructuras.Node<String[]> primero = lista_relaciones.getpFirst();
-        
-        while(primero!=null){
+
+        while (primero != null) {
             w.write(primero.toString());
-            System.out.println();primero.toString();
+            System.out.println();
+            primero.toString();
             primero = primero.getpNext();
         }
         w.close();
 
-        
     }
+
     /**
      * @param args the command line arguments
      */
