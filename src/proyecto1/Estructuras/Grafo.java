@@ -58,15 +58,6 @@ public class Grafo {
         }
     }
     
-  //  public void NuevaArista (Object origen, Object destino, float peso){
-    //    if(existeVertice(origen)&& existeVertice(destino)){
-        //    NodoGrafo posicion= primero;
-      //      while(!posicion.dato.equals(origen.toString())){
-     //           posicion = posicion.siguiente;
-       //     }
-     //       posicion.lista.nuevaAdyacenciaObject(destino, peso);
-     //   }
-   // }
     
     public void nuevoNodo(Object dato){
         if(!existeVertice(dato)){
@@ -104,6 +95,43 @@ public class Grafo {
             
         }
         
+    }
+    
+    public void eliminarNodo(verticeEliminar){
+        if(this.existeVerice(verticeEliminar)){
+            NodoGrafo temporal = this.primero;
+            while(temporal != null){
+                this.eliminarArco(temporal.dato.verticeEliminar);
+                temporal = temporal.siguiente;
+                
+                if(this.primero == this.ultimo){
+                    this.primero= null;
+                    this.ultimo= null;
+                }else{
+                    NodoGrafo pActual = this.primero;
+                    NodoGrafo pAnterior = null;
+                    while(pActual != null && verticeEliminar>pActual.dato){
+                        pAnterior= pActual;
+                        pActual =pActual.siguiente;
+                        if(pActual == this.primero){
+                            NodoGrafo nodoEliminar = this.primero;
+                            this.primero = this.primero.siguiente;
+                            nodoEliminar.siguiente= null;
+
+                    } else {
+                        if(pActual == this.ultimo){
+                            pAnterior.siguiente = null;
+                            this.ultimo = pAnterior;
+                        }else{
+                            pAnterior.siguiente= pActual.siguiente;
+                            pActual.siguiente= null;
+                        }
+                            
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public NodoGrafo getPrimero() {
