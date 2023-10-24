@@ -57,7 +57,10 @@ public class Grafo {
 
             posicion.lista.nuevaAdyacencia(destino);
         }
-    }
+    }    
+    
+    
+
 
     //  public void NuevaArista (Object origen, Object destino, float peso){
     //    if(existeVertice(origen)&& existeVertice(destino)){
@@ -68,24 +71,26 @@ public class Grafo {
     //       posicion.lista.nuevaAdyacenciaObject(destino, peso);
     //   }
     // }
-    public void nuevoNodo(Object dato) {
-        if (!existeVertice(dato)) {
+
+    
+    public void nuevoNodo(Object dato){
+        if(!existeVertice(dato)){
             NodoGrafo nodo = new NodoGrafo(dato);
-            if (grafoVacio()) {
+            if(grafoVacio()){
                 primero = nodo;
                 ultimo = nodo;
-            } else {
-                if (dato.toString().compareTo(primero.dato.toString()) <= 0) {
+            } else{
+                if(dato.toString().compareTo(primero.dato.toString())<=0){
                     nodo.siguiente = primero;
-                    primero = nodo;
-
-                } else {
-                    if (dato.toString().compareTo(ultimo.dato.toString()) >= 0) {
+                    primero= nodo;
+                    
+                }else{
+                    if(dato.toString().compareTo(ultimo.dato.toString())>=0){
                         ultimo.siguiente = nodo;
                         ultimo = nodo;
-                    } else {
+                    }else{
                         NodoGrafo temporal = primero;
-                        while (dato.toString().compareTo(temporal.dato.toString()) < 0) {
+                        while(dato.toString().compareTo(temporal.dato.toString())<0){
                             temporal = temporal.siguiente;
                         }
                     }
@@ -93,7 +98,7 @@ public class Grafo {
             }
         }
     }
-
+    
     public void eliminarArco(Object origen, Object destino) {
         if (this.existeVertice(origen) && this.existeVertice(destino)) {
             NodoGrafo posicion = this.primero;
@@ -105,6 +110,43 @@ public class Grafo {
         }
 
     }
+    
+//    public void eliminarNodo(verticeEliminar){
+//        if(this.existeVerice(verticeEliminar)){
+//            NodoGrafo temporal = this.primero;
+//            while(temporal != null){
+//                this.eliminarArco(temporal.dato.verticeEliminar);
+//                temporal = temporal.siguiente;
+//                
+//                if(this.primero == this.ultimo){
+//                    this.primero= null;
+//                    this.ultimo= null;
+//                }else{
+//                    NodoGrafo pActual = this.primero;
+//                    NodoGrafo pAnterior = null;
+//                    while(pActual != null && verticeEliminar>pActual.dato){
+//                        pAnterior= pActual;
+//                        pActual =pActual.siguiente;
+//                        if(pActual == this.primero){
+//                            NodoGrafo nodoEliminar = this.primero;
+//                            this.primero = this.primero.siguiente;
+//                            nodoEliminar.siguiente= null;
+//
+//                    } else {
+//                        if(pActual == this.ultimo){
+//                            pAnterior.siguiente = null;
+//                            this.ultimo = pAnterior;
+//                        }else{
+//                            pAnterior.siguiente= pActual.siguiente;
+//                            pActual.siguiente= null;
+//                        }
+//                            
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     public NodoGrafo getPrimero() {
         return primero;

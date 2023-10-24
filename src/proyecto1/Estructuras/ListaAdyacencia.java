@@ -88,7 +88,7 @@ public class ListaAdyacencia {
         return cadena;
 
     }
-
+            
     public void eliminarAdyacencia(Object dato) {
         if (!listaVacia() && this.adyacente(dato)) {
             if (this.primero == this.ultimo) {
