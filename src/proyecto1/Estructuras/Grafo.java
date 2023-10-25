@@ -111,42 +111,45 @@ public class Grafo {
 
     }
     
-//    public void eliminarNodo(verticeEliminar){
-//        if(this.existeVerice(verticeEliminar)){
-//            NodoGrafo temporal = this.primero;
-//            while(temporal != null){
-//                this.eliminarArco(temporal.dato.verticeEliminar);
-//                temporal = temporal.siguiente;
-//                
-//                if(this.primero == this.ultimo){
-//                    this.primero= null;
-//                    this.ultimo= null;
-//                }else{
-//                    NodoGrafo pActual = this.primero;
-//                    NodoGrafo pAnterior = null;
-//                    while(pActual != null && verticeEliminar>pActual.dato){
-//                        pAnterior= pActual;
-//                        pActual =pActual.siguiente;
-//                        if(pActual == this.primero){
-//                            NodoGrafo nodoEliminar = this.primero;
-//                            this.primero = this.primero.siguiente;
-//                            nodoEliminar.siguiente= null;
-//
-//                    } else {
-//                        if(pActual == this.ultimo){
-//                            pAnterior.siguiente = null;
-//                            this.ultimo = pAnterior;
-//                        }else{
-//                            pAnterior.siguiente= pActual.siguiente;
-//                            pActual.siguiente= null;
-//                        }
-//                            
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
+    
+
+    
+    public void eliminarNodo(String verticeEliminar){
+        if(this.existeVertice(verticeEliminar)){
+            NodoGrafo temporal = this.primero;
+            while(temporal != null){
+                eliminarArco(temporal.dato , verticeEliminar);
+                temporal = temporal.siguiente;
+                
+                if(this.primero == this.ultimo){
+                   this.primero= null;
+                    this.ultimo= null;
+                }else{
+                    NodoGrafo pActual = this.primero;
+                    NodoGrafo pAnterior = null;
+                    while(pActual != null && verticeEliminar.toString().compareTo(pActual.dato.toString())>0){
+                        pAnterior= pActual;
+                        pActual =pActual.siguiente;
+                        if(pActual == this.primero){
+                            NodoGrafo nodoEliminar = this.primero;
+                            this.primero = this.primero.siguiente;
+                            nodoEliminar.siguiente= null;
+
+                    } else {
+                        if(pActual == this.ultimo){
+                            pAnterior.siguiente = null;
+                            this.ultimo = pAnterior;
+                        }else{
+                            pAnterior.siguiente= pActual.siguiente;
+                            pActual.siguiente= null;
+                        }
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     public NodoGrafo getPrimero() {
         return primero;

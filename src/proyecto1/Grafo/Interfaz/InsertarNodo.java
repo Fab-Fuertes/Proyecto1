@@ -28,6 +28,7 @@ public class InsertarNodo extends javax.swing.JFrame {
     public InsertarNodo(MostrarGrafo grafo) {
         initComponents();
         mostrar = grafo;
+        setTitle("Insertar");
         
     }
 
