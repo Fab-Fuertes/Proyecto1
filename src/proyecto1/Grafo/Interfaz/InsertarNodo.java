@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package proyecto1.Grafo.Interfaz;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,16 +12,15 @@ import javax.swing.JOptionPane;
 import proyecto1.Estructuras.Grafo;
 import proyecto1.Grafo.Grafico.MostrarGrafo;
 
-
 /**
  *
  * @author fabys
  */
 public class InsertarNodo extends javax.swing.JFrame {
+
     Grafo grafo = new Grafo();
     public static MostrarGrafo mostrar;
     InterfazPrincipal interfaz;
-    
 
     /**
      * Creates new form InsertarNodo
@@ -30,6 +30,7 @@ public class InsertarNodo extends javax.swing.JFrame {
         mostrar = grafo;
         setTitle("Insertar");
         
+
     }
 
     /**
@@ -44,8 +45,8 @@ public class InsertarNodo extends javax.swing.JFrame {
         Entrada = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         Salida = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        NuevoNodo = new javax.swing.JButton();
+        NuevoArco = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,17 +61,17 @@ public class InsertarNodo extends javax.swing.JFrame {
         Salida.setRows(5);
         jScrollPane1.setViewportView(Salida);
 
-        jButton1.setText("Nuevo Nodo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        NuevoNodo.setText("Nuevo Nodo");
+        NuevoNodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                NuevoNodoActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Nuevo Arco");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        NuevoArco.setText("Nuevo Arco");
+        NuevoArco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                NuevoArcoActionPerformed(evt);
             }
         });
 
@@ -91,9 +92,9 @@ public class InsertarNodo extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(Entrada, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NuevoNodo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(36, 36, 36)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(NuevoArco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jButton3))
                 .addGap(49, 49, 49)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
@@ -109,8 +110,8 @@ public class InsertarNodo extends javax.swing.JFrame {
                         .addComponent(Entrada, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(NuevoNodo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NuevoArco, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3)))
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -123,35 +124,39 @@ public class InsertarNodo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EntradaActionPerformed
 
-           
-    
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+    private void NuevoArcoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoArcoActionPerformed
         // TODO add your handling code here:
+
         String origen = "";
-        String destino ="";
+        String destino = "";
         origen = JOptionPane.showInputDialog("Origen:");
         destino = JOptionPane.showInputDialog("Destino:");
-        if (mostrar.getGrafo().existeVertice(origen) && mostrar.getGrafo().existeVertice(destino)){
+        if (mostrar.getGrafo().existeVertice(origen) && mostrar.getGrafo().existeVertice(destino)) {
             mostrar.getGrafo().NuevoArco(origen, destino);
             mostrar.getGraph().addEdge(origen + "-" + destino, origen, destino, true);
-        }
+        } 
         Salida.setText(MostrarGrafo.grafo.toString());
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_NuevoArcoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void NuevoNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoNodoActionPerformed
         // TODO add your handling code here:
         String dato = Entrada.getText();
-        mostrar.getGrafo().nuevoNodo(dato);
-        mostrar.getGraph().addNode(dato);
-        Salida.setText(mostrar.getGrafo().toString());
-        Entrada.setText("");
+        if (!(mostrar.getGrafo().existeVertice(dato))) {
+            mostrar.getGrafo().nuevoNodo(dato);
+            mostrar.getGraph().addNode(dato);
+            Salida.setText(mostrar.getGrafo().toString());
+            Entrada.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ya existe el usuario!!", "Input", JOptionPane.ERROR_MESSAGE);
+        }
         try {
             interfaz.modificarArchivo(mostrar);
         } catch (IOException ex) {
             Logger.getLogger(InsertarNodo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_NuevoNodoActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -159,8 +164,7 @@ public class InsertarNodo extends javax.swing.JFrame {
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -198,9 +202,9 @@ public class InsertarNodo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Entrada;
+    private javax.swing.JButton NuevoArco;
+    private javax.swing.JButton NuevoNodo;
     private javax.swing.JTextArea Salida;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
