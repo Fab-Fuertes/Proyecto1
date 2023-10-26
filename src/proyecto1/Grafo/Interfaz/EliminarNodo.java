@@ -5,18 +5,24 @@
  */
 package proyecto1.Grafo.Interfaz;
 
+import javax.swing.JOptionPane;
 import proyecto1.Grafo.Grafico.MostrarGrafo;
 import proyecto1.Estructuras.Grafo;
 import proyecto1.Estructuras.ListaAdyacencia;
+import proyecto1.Estructuras.Usuarios;
+import static proyecto1.Grafo.Interfaz.InterfazPrincipal.lista_relaciones;
+import static proyecto1.Grafo.Interfaz.InterfazPrincipal.lista_usuarios;
 
 /**
  *
  * @author fabys
  */
 public class EliminarNodo extends javax.swing.JFrame {
+
     Grafo grafo = new Grafo();
     public static MostrarGrafo mostrar;
     InterfazPrincipal interfaz;
+
     /**
      * Creates new form EliminarNodo
      */
@@ -25,7 +31,6 @@ public class EliminarNodo extends javax.swing.JFrame {
         mostrar = grafo;
         setTitle("Eliminar");
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,12 +118,25 @@ public class EliminarNodo extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        try {
         String dato = Entrada.getText();
-        mostrar.getGrafo().eliminarNodo(dato);
+
+       //mostrar.getGrafo().eliminarNodo(dato);
         mostrar.getGraph().removeNode(dato);
         Salida.setText(mostrar.getGrafo().toString());
+        lista_usuarios.deleteValueUser(lista_usuarios, dato);
+        for (int count = 0; count < lista_relaciones.getSize(); count++) {
+            String[] arreglo = lista_relaciones.GetbyIndex(count);
+            if (dato.equals(arreglo[0]) || dato.equals(arreglo[1])) {
+                lista_relaciones.deleteValue(arreglo);
+            }
 
+        }
         Entrada.setText("");
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "USUARIO NO ENCONTRADO!!", "User not found", JOptionPane.ERROR_MESSAGE);
+        
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
