@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proyecto1.Estructuras.Grafo;
+import proyecto1.Estructuras.Usuarios;
 import proyecto1.Grafo.Grafico.MostrarGrafo;
 
 /**
@@ -132,7 +133,11 @@ public class InsertarNodo extends javax.swing.JFrame {
         String destino = "";
         origen = JOptionPane.showInputDialog("Origen:");
         destino = JOptionPane.showInputDialog("Destino:");
+        String[] relacion = new String[2];
+        relacion[0] = origen;
+        relacion[1] = destino;
         if (mostrar.getGrafo().existeVertice(origen) && mostrar.getGrafo().existeVertice(destino)) {
+            InterfazPrincipal.lista_relaciones.addEnd(relacion);
             mostrar.getGrafo().NuevoArco(origen, destino);
             mostrar.getGraph().addEdge(origen + "-" + destino, origen, destino, true);
         } 
@@ -142,7 +147,11 @@ public class InsertarNodo extends javax.swing.JFrame {
     private void NuevoNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoNodoActionPerformed
         // TODO add your handling code here:
         String dato = Entrada.getText();
+        Usuarios user = new Usuarios();
+        user.setUsuario(dato);
         if (!(mostrar.getGrafo().existeVertice(dato))) {
+            InterfazPrincipal.lista_usuarios.addEnd(user);
+            InterfazPrincipal.lista_adyacencias.nuevaAdyacencia(dato);
             mostrar.getGrafo().nuevoNodo(dato);
             mostrar.getGraph().addNode(dato);
             Salida.setText(mostrar.getGrafo().toString());
@@ -150,11 +159,8 @@ public class InsertarNodo extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Ya existe el usuario!!", "Input", JOptionPane.ERROR_MESSAGE);
         }
-        try {
-            interfaz.modificarArchivo(mostrar);
-        } catch (IOException ex) {
-            Logger.getLogger(InsertarNodo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        
 
     }//GEN-LAST:event_NuevoNodoActionPerformed
 
