@@ -13,6 +13,7 @@ import proyecto1.Estructuras.Grafo;
 import proyecto1.Estructuras.Arco;
 import proyecto1.Estructuras.NodoGrafo;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -29,10 +30,11 @@ import org.graphstream.graph.Node;
  */
 public class InterfazPrincipal extends javax.swing.JFrame {
 
-    ListaAdyacencia lista = new ListaAdyacencia();
+    public static List<Usuarios> lista_usuarios = new List();
+    public static ListaAdyacencia lista_adyacencias = new ListaAdyacencia();
     MostrarGrafo grafo;
-    List<String[]> lista_relaciones = new List<String[]>();
-    File archivo;
+    public static List<String[]> lista_relaciones = new List<String[]>();
+    public static File archivo;
 
     /**
      * Creates new form InterfazPrincipal
@@ -60,6 +62,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        GuadarCambios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +97,13 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         });
 
+        GuadarCambios.setText("Guardar Cambios");
+        GuadarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuadarCambiosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,7 +115,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .addComponent(GuadarCambios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(202, Short.MAX_VALUE)
@@ -122,7 +134,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(52, 52, 52)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(GuadarCambios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                 .addGap(62, 62, 62)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59))
@@ -180,6 +194,30 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void GuadarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuadarCambiosActionPerformed
+
+        try (PrintWriter writer = new PrintWriter(this.archivo)) {
+            writer.println("usuarios");
+
+            for (int count = 0; count < lista_usuarios.getSize(); count++) {
+                System.out.println(lista_usuarios.GetbyIndex(count).getUsuario());
+                writer.println(lista_usuarios.GetbyIndex(count).getUsuario());
+            }
+
+            writer.println("relaciones");
+
+            for (int count = 0; count < lista_relaciones.getSize(); count++) {
+                System.out.println(lista_relaciones.GetbyIndex(count)[0] + ", " + lista_relaciones.GetbyIndex(count)[1]);
+                writer.println(lista_relaciones.GetbyIndex(count)[0] + ", " + lista_relaciones.GetbyIndex(count)[1]);
+
+            }
+        } catch (IOException e) {
+            System.out.println("Ocurrió un error al escribir en el archivo");
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_GuadarCambiosActionPerformed
+
     public void cargarArchivo(File Archivo) {
         FileReader fr = null;
         BufferedReader br = null;
@@ -195,10 +233,13 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 Usuarios u = new Usuarios();
 
                 String arreglo[] = linea.split(",");
+
                 //String arreglo2[] = linea.split(",");
                 if (relaciones == 0) {
-                    System.out.println(arreglo[0]);
+
                     if (!linea.equals("usuarios") && !linea.equals("relaciones")) {
+                        lista_adyacencias.nuevaAdyacencia(u);
+                        lista_usuarios.addEnd(u);
                         u.setUsuario(linea);
                         grafo.getGraph().addNode(linea);
                         grafo.getGrafo().nuevoNodo(linea);
@@ -209,23 +250,32 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
                 } else {
 
-                    System.out.println(arreglo[0] + "," + arreglo[1]);
+                    lista_relaciones.addEnd(arreglo);
                     String origen = arreglo[0];
                     String destino = arreglo[1].replaceAll(" ", "");
 
-                    lista_relaciones.addEnd(arreglo);
                     grafo.getGrafo().NuevoArco(origen, destino);
                     grafo.getGraph().addEdge(origen + "-" + destino, origen, destino, true);
 
                 }
 
-                lista.nuevaAdyacencia(u);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
 
         } finally {
+
+        }
+
+        lista_usuarios.print();
+        int contador = 0;
+        while (contador < lista_relaciones.getSize()) {
+            System.out.println(lista_relaciones.GetbyIndex(contador)[0] + "," + lista_relaciones.GetbyIndex(contador)[1]);
+            contador++;
+        }
+
+    }
 
     public boolean ArchivoApto(File Archivo) {
         if (Archivo != null) {
@@ -257,96 +307,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             return true;
         }
         return false;
-    }
-
-    public void cargarArchivo(File Archivo) {
-
-        if (this.ArchivoApto(Archivo) == true) {
-
-            FileReader fr = null;
-            BufferedReader br = null;
-
-            try {
-                fr = new FileReader(Archivo);
-                br = new BufferedReader(fr);
-
-                String linea;
-                int relaciones = 0;
-
-                while ((linea = br.readLine()) != null) {
-
-                    Usuarios u = new Usuarios();
-
-                    String arreglo[] = linea.split(",");
-                    //String arreglo2[] = linea.split(",");
-                    if (relaciones == 0) {
-                        System.out.println(arreglo[0]);
-                        if (!linea.equals("usuarios") && !linea.equals("relaciones")) {
-                            u.setUsuario(linea);
-                            grafo.getGraph().addNode(linea);
-                            grafo.getGrafo().nuevoNodo(linea);
-                        }
-                        if (linea.equals("relaciones")) {
-                            relaciones++;
-                        }
-
-                    } else {
-
-                        System.out.println(arreglo[0] + "," + arreglo[1]);
-                        String origen = arreglo[0];
-                        String destino = arreglo[1].replaceAll(" ", "");
-
-                        lista_relaciones.addEnd(arreglo);
-                        grafo.getGrafo().NuevoArco(origen, destino);
-                        grafo.getGraph().addEdge(origen + "-" + destino, origen, destino, true);
-
-                    }
-
-                    lista.nuevaAdyacencia(u);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            } finally {
-                try {
-                    if (fr != null) {
-                        fr.close();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Archivo Inválido!!", "InvalidInputException", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    public void modificarArchivo(MostrarGrafo grafo) throws IOException {
-        FileWriter f = new FileWriter(archivo);
-        PrintWriter w = new PrintWriter(f);
-        NodoGrafo aux = grafo.getGrafo().getPrimero();
-        w.write("usuarios" + "\n");
-
-        while (aux != null) {
-            w.write(aux.dato.toString() + "\n");
-            System.out.println(aux.dato);
-
-            aux = aux.siguiente;
-        }
-        w.write("relaciones" + "\n");
-
-        proyecto1.Estructuras.Node<String[]> primero = lista_relaciones.getpFirst();
-
-        while (primero != null) {
-            w.write(primero.toString());
-            System.out.println();
-            primero.toString();
-            primero = primero.getpNext();
-        }
-        w.close();
-
     }
 
     /**
@@ -385,6 +345,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton GuadarCambios;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

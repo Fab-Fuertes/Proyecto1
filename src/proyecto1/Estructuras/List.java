@@ -10,37 +10,37 @@ package proyecto1.Estructuras;
  * @author fabys
  */
 public class List<T> { //Esta es una lista simple. 
+
     private Node<T> pFirst;
     private Node<T> pLast;
     private int size;
-    
-    public List(){
+
+    public List() {
         this.pFirst = null;
         this.pLast = null;
         this.size = 0;
-    
+
     }
-    
+
     public boolean isEmpty() {
         return this.pFirst == null;
     }
-    
-    public void addEnd(T data){
+
+    public void addEnd(T data) {
         Node<T> node = new Node(data);
-        
+
         if (this.isEmpty()) {
             this.pFirst = node;
             this.pLast = node;
-        }else{
+        } else {
             this.pLast.setpNext(node);
             this.pLast = node;
         }
         size++;
     }
-    
-      public T GetbyIndex(int index) {
-        Node<T> pAux = this.pFirst.getpNext();
 
+    public T GetbyIndex(int index) {
+        Node<T> pAux = this.pFirst;
 
         if (this.size <= index) {
 
@@ -48,13 +48,27 @@ public class List<T> { //Esta es una lista simple.
 
         } else {
 
-            for (int count = 1; count < index;count++) {
+            for (int count = 0; count < index; count++) {
 
-            pAux = pAux.getpNext();
+                pAux = pAux.getpNext();
             }
             return pAux.getData();
         }
 
+    }
+    
+    public void deleteStart(){
+    this.pFirst = this.pFirst.getpNext();
+    }
+
+    public void print() {
+        Node aux = this.pFirst;
+
+        for (int count = 0; count < this.getSize(); count++) {
+            System.out.println(aux.getData());
+            aux = aux.getpNext();
+
+        }
 
     }
 
@@ -81,5 +95,5 @@ public class List<T> { //Esta es una lista simple.
     public void setSize(int size) {
         this.size = size;
     }
-    
+
 }
