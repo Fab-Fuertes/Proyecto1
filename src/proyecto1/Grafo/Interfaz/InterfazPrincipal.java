@@ -166,7 +166,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         if (this.ArchivoApto(archivo) == true) {
 
             grafo.mostrarGrafo(); // Llama al método mostrarGrafo() cuando se presiona el botón
-            grafo.mostrarComponentesFuertementeConectados();
 
         } else {
             JOptionPane.showMessageDialog(null, "Ningun Archivo detectado!!", "WARNING", JOptionPane.ERROR_MESSAGE);
@@ -184,6 +183,15 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        if (this.ArchivoApto(archivo) == true) {
+
+            grafo.mostrarGrafo(); // Llama al método mostrarGrafo() cuando se presiona el botón
+            grafo.mostrarComponentesFuertementeConectados();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Ningun Archivo detectado!!", "WARNING", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void GuadarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuadarCambiosActionPerformed
