@@ -208,7 +208,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
             for (int count = 0; count < lista_relaciones.getSize(); count++) {
                 System.out.println(lista_relaciones.GetbyIndex(count)[0] + ", " + lista_relaciones.GetbyIndex(count)[1]);
-                writer.println(lista_relaciones.GetbyIndex(count)[0] + ", " + lista_relaciones.GetbyIndex(count)[1]);
+                writer.println(lista_relaciones.GetbyIndex(count)[0] + ", " + lista_relaciones.GetbyIndex(count)[1].replaceAll(" ",""));
 
             }
         } catch (IOException e) {
@@ -267,8 +267,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         } finally {
 
         }
-
-        lista_usuarios.print();
+        System.out.println("HECHO!!");
+        for (int cont = 0; cont < lista_usuarios.getSize();cont++) {
+           System.out.println(lista_usuarios.GetbyIndex(cont).getUsuario());
+       }
         int contador = 0;
         while (contador < lista_relaciones.getSize()) {
             System.out.println(lista_relaciones.GetbyIndex(contador)[0] + "," + lista_relaciones.GetbyIndex(contador)[1]);
