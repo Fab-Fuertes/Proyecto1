@@ -31,12 +31,7 @@ public class ListaAdyacencia {
         }
     }
 
-    public void nuevaAdyacenciaObject(Object destino, float peso) {
-        if (!adyacente(destino)) {
-            Arco nodo = new Arco(destino, peso);
-            insertar(nodo, destino);
-        }
-    }
+
 
     public void insertar(Arco nodo, Object destino) {
         if (listaVacia()) {

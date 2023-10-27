@@ -5,6 +5,7 @@
  */
 package proyecto1.Grafo.Interfaz;
 
+import javax.swing.JOptionPane;
 import proyecto1.Grafo.Grafico.MostrarGrafo;
 
 /**
@@ -109,6 +110,8 @@ public class VentanaModificarGrafo extends javax.swing.JFrame {
         a.grafo = graph;
         a.setVisible(true);
         this.setVisible(false);
+        
+        JOptionPane.showMessageDialog(this, "Pulse en el boton de guardar cambios para conservar los datos introducidos.");
         
     }//GEN-LAST:event_jButton3ActionPerformed
 

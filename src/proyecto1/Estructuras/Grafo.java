@@ -59,18 +59,6 @@ public class Grafo {
         }
     }    
     
-    
-
-
-    //  public void NuevaArista (Object origen, Object destino, float peso){
-    //    if(existeVertice(origen)&& existeVertice(destino)){
-    //    NodoGrafo posicion= primero;
-    //      while(!posicion.dato.equals(origen.toString())){
-    //           posicion = posicion.siguiente;
-    //     }
-    //       posicion.lista.nuevaAdyacenciaObject(destino, peso);
-    //   }
-    // }
 
     
     public void nuevoNodo(Object dato){

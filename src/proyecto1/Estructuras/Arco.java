@@ -11,7 +11,6 @@ package proyecto1.Estructuras;
  */
 public class Arco {
     Object destino;
-    float peso;
     public Arco siguiente;
     
     public Arco(Object d){  //Contructor que recibe un parámetro y  fija como destino.
@@ -19,10 +18,4 @@ public class Arco {
         siguiente = null;
     }
     
-    public Arco(Object d, float p){ //Para un arco con peso.
-        destino = d;
-        peso = p;
-        siguiente = null;
-        
-    }
 }
