@@ -6,20 +6,33 @@
 package proyecto1.Estructuras;
 
 /**
- *
+ * Esta clase representa una estructura de datos de tipo Stack (Pila).
+ * @param <T> el tipo de elementos guardados en el Stack.
  * @author cehernandez
  */
 public class Stack<T> {
     private List<T> elements;
 
+    /**
+     * Constructor para la clase Stack.
+     * Inicializa la lista de elementos.
+     */
     public Stack() {
         elements = new List<T>();
     }
 
+    /**
+     * Este método agrega un elemento al final del Stack.
+     * @param data el elemento a agregar.
+     */
     public void push(T data) {
         elements.addEnd(data);
     }
     
+    /**
+     * Este método elimina y devuelve el último elemento del Stack.
+     * @return el último elemento del Stack, o null si el Stack está vacío.
+     */
     public T pop() {
         if (elements.isEmpty()) {
             return null;
@@ -49,8 +62,13 @@ public class Stack<T> {
         }
     }
 
+    /**
+     * Este método verifica si el Stack está vacío.
+     * @return true si el Stack está vacío, false en caso contrario.
+     */
     public boolean isEmpty() {
         return elements.isEmpty();
     }
 }
+
 

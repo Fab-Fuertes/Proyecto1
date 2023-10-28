@@ -9,24 +9,36 @@ package proyecto1.Estructuras;
  *
  * @author fabys
  */
+/**
+ * Esta clase representa un grafo.
+ */
 public class Grafo {
 
     private NodoGrafo primero;
     private NodoGrafo ultimo;
 
+    /**
+     * Construye un grafo vacío.
+     */
     public Grafo() {
         primero = null;
         ultimo = null;
     }
 
+    /**
+     * Verifica si el grafo está vacío.
+     *
+     * @return verdadero si el grafo está vacío, falso de lo contrario
+     */
     public boolean grafoVacio() {
         return primero == null;
     }
 
     /**
+     * Verifica si existe un vértice en el grafo.
      *
-     * @param dato
-     * @return
+     * @param dato el dato del vértice a verificar
+     * @return verdadero si el vértice existe, falso de lo contrario
      */
     public boolean existeVertice(Object dato) {
         boolean existe = false;
@@ -44,9 +56,10 @@ public class Grafo {
     }
 
     /**
+     * Crea un nuevo arco entre dos vértices.
      *
-     * @param origen
-     * @param destino
+     * @param origen el vértice de origen
+     * @param destino el vértice de destino
      */
     public void NuevoArco(Object origen, Object destino) {
         if (existeVertice(origen) && existeVertice(destino)) {
@@ -58,9 +71,12 @@ public class Grafo {
             posicion.lista.nuevaAdyacencia(destino);
         }
     }    
-    
 
-    
+    /**
+     * Crea un nuevo nodo en el grafo.
+     *
+     * @param dato el dato del nuevo nodo
+     */
     public void nuevoNodo(Object dato){
         if(!existeVertice(dato)){
             NodoGrafo nodo = new NodoGrafo(dato);
@@ -71,7 +87,7 @@ public class Grafo {
                 if(dato.toString().compareTo(primero.dato.toString())<=0){
                     nodo.siguiente = primero;
                     primero= nodo;
-                    
+
                 }else{
                     if(dato.toString().compareTo(ultimo.dato.toString())>=0){
                         ultimo.siguiente = nodo;
@@ -86,7 +102,13 @@ public class Grafo {
             }
         }
     }
-    
+
+    /**
+     * Elimina un arco entre dos vértices.
+     *
+     * @param origen el vértice de origen
+     * @param destino el vértice de destino
+     */
     public void eliminarArco(Object origen, Object destino) {
         if (this.existeVertice(origen) && this.existeVertice(destino)) {
             NodoGrafo posicion = this.primero;
@@ -99,9 +121,11 @@ public class Grafo {
 
     }
     
-    
-
-    
+    /**
+     * Elimina un nodo del grafo.
+     *
+     * @param verticeEliminar el vértice a eliminar
+     */
     public void eliminarNodo(String verticeEliminar){
         if(this.existeVertice(verticeEliminar)){
             NodoGrafo temporal = this.primero;
@@ -132,29 +156,54 @@ public class Grafo {
                             pActual.siguiente= null;
                         }
                             
-                        }
+                      }
                     }
                 }
             }
         }
     }
 
+    /**
+     * Obtiene el primer nodo del grafo.
+     *
+     * @return el primer nodo
+     */
     public NodoGrafo getPrimero() {
         return primero;
     }
 
+    /**
+     * Establece el primer nodo del grafo.
+     *
+     * @param primero el nuevo primer nodo
+     */
     public void setPrimero(NodoGrafo primero) {
         this.primero = primero;
     }
 
+    /**
+     * Obtiene el último nodo del grafo.
+     *
+     * @return el último nodo
+     */
     public NodoGrafo getUltimo() {
         return ultimo;
     }
 
+    /**
+     * Establece el último nodo del grafo.
+     *
+     * @param ultimo el nuevo último nodo
+     */
     public void setUltimo(NodoGrafo ultimo) {
         this.ultimo = ultimo;
     }
 
+    /**
+     * Devuelve una representación en cadena del grafo.
+     *
+     * @return una representación en cadena del grafo
+     */
     public String toString() {
         String cadena = "";
         NodoGrafo temporal = primero;
@@ -166,6 +215,12 @@ public class Grafo {
         return cadena;
     }
 
+    /**
+     * Busca un nodo en el grafo.
+     *
+     * @param dato el dato del nodo a buscar
+     * @return el nodo si se encuentra, nulo de lo contrario
+     */
     private NodoGrafo buscarNodo(Object dato) {
         NodoGrafo temp = primero;
         while (temp != null) {
@@ -177,6 +232,12 @@ public class Grafo {
         return null;
     }
 
+    /**
+     * Agrega una arista dirigida entre dos vértices.
+     *
+     * @param origen el vértice de origen
+     * @param destino el vértice de destino
+     */
     public void agregarAristaDirigida(Object origen, Object destino) {
         NodoGrafo nodoOrigen = buscarNodo(origen);
         if (nodoOrigen != null) {
@@ -184,6 +245,13 @@ public class Grafo {
         }
     }
 
+    /**
+     * Verifica si un valor está contenido en un array.
+     *
+     * @param array el array a verificar
+     * @param v el valor a buscar
+     * @return verdadero si el valor está en el array, falso de lo contrario
+     */
     private boolean contains(String[] array, String v) {
         for (String element : array) {
             if (element != null && element.equals(v)) {
@@ -193,6 +261,11 @@ public class Grafo {
         return false;
     }
 
+    /**
+     * Implementa el algoritmo de Kosaraju para encontrar componentes fuertemente conectados.
+     *
+     * @return un array bidimensional con los componentes fuertemente conectados
+     */
     public String[][] kosaraju() {
         Stack<NodoGrafo> stack = new Stack<>();
         String[] visited = new String[100]; // Asume un máximo de 100 nodos
@@ -225,6 +298,15 @@ public class Grafo {
         return stronglyConnectedComponents;
     }
 
+    /**
+     * Realiza una búsqueda en profundidad en el grafo.
+     *
+     * @param v el nodo inicial
+     * @param visited un array con los nodos visitados
+     * @param visitedCount el número de nodos visitados
+     * @param stack una pila para almacenar los nodos visitados
+     * @return el número de nodos visitados después de realizar la búsqueda en profundidad
+     */
     private int dfs(NodoGrafo v, String[] visited, int visitedCount, Stack<NodoGrafo> stack) {
         visited[visitedCount] = (String) v.dato;
         visitedCount++;
@@ -240,6 +322,16 @@ public class Grafo {
         return visitedCount;
     }
 
+    /**
+     * Realiza una búsqueda en profundidad en el grafo.
+     *
+     * @param v el nodo inicial
+     * @param visited un array con los nodos visitados
+     * @param visitedCount el número de nodos visitados
+     * @param component un array para almacenar los nodos del componente actual
+     * @param nodeCount el número de nodos en el componente actual
+     * @return el número de nodos en el componente después de realizar la búsqueda en profundidad
+     */
     private int dfs(NodoGrafo v, String[] visited, int visitedCount, String[] component, int nodeCount) {
         visited[visitedCount] = (String) v.dato;
         visitedCount++;
@@ -256,6 +348,11 @@ public class Grafo {
         return nodeCount;
     }
 
+    /**
+     * Obtiene el grafo transpuesto.
+     *
+     * @return el grafo transpuesto
+     */
     private Grafo getTranspose() {
         Grafo g = new Grafo();
         NodoGrafo temp = primero;

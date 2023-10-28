@@ -6,14 +6,18 @@
 package proyecto1.Estructuras;
 
 /**
- *
- * @author fabys
+ * Esta clase representa un arco en un grafo.
  */
 public class Arco {
     Object destino;
     public Arco siguiente;
     
-    public Arco(Object d){  //Contructor que recibe un parámetro y  fija como destino.
+    /**
+     * Constructor que recibe un parámetro y lo fija como destino.
+     *
+     * @param d el destino del arco
+     */
+    public Arco(Object d){  
         destino = d;
         siguiente = null;
     }
