@@ -210,9 +210,13 @@ public class InterfazPrincipal extends javax.swing.JFrame {
      * @param evt El evento de acción.
      */
     
-    
     private void GuadarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuadarCambiosActionPerformed
-
+        
+        if (this.archivo == null) {
+            System.out.println("El archivo no ha sido inicializado");
+            return;
+        }
+        
         try (PrintWriter writer = new PrintWriter(this.archivo)) {
             writer.println("usuarios");
 
