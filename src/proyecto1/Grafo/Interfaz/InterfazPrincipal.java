@@ -196,7 +196,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (this.ArchivoApto(archivo) == true) {
 
-            grafo.mostrarGrafo(); // Llama al método mostrarGrafo() cuando se presiona el botón
             grafo.mostrarComponentesFuertementeConectados();
 
         } else {
@@ -210,6 +209,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
      * Se utiliza para guardar los cambios realizados en el grafo en el archivo cargado.
      * @param evt El evento de acción.
      */
+    
+    
     private void GuadarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuadarCambiosActionPerformed
 
         try (PrintWriter writer = new PrintWriter(this.archivo)) {

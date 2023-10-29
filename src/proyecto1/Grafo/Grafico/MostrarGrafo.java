@@ -44,12 +44,7 @@ public class MostrarGrafo {
      * Muestra el grafo.
      */
     public void mostrarGrafo() {
-        for (Node node : graph) {
-            node.setAttribute("ui.label", node.getId());
-            if (node.getId().contains("@")) {
-                node.setAttribute("ui.style", "text-size: 15px; text-alignment: under; text-offset: 0px, 3px;");
-            }
-        }
+        inicializarGrafo();
         graph.display();
     }
 
@@ -89,12 +84,24 @@ public class MostrarGrafo {
         this.graph = graph;
     }
     
-        
+    public void inicializarGrafo() {
+        for (Node node : graph) {
+            node.setAttribute("ui.label", node.getId());
+            if (node.getId().contains("@")) {
+                node.setAttribute("ui.style", "text-size: 15px; text-alignment: under; text-offset: 0px, 3px;");
+            }
+        }
+    }
+
 
     /**
      * Muestra los componentes fuertemente conectados del grafo.
      */
     public void mostrarComponentesFuertementeConectados() {
+        // Muestra el grafo.
+        graph.display();
+
+        inicializarGrafo();
         System.setProperty("org.graphstream.ui", "swing");
 
         // Implementa el algoritmo de Kosaraju en la clase Grafo y usa el método aquí.
@@ -106,16 +113,16 @@ public class MostrarGrafo {
             for (String nodo : componentes[i]) {
                 if (nodo != null) {
                     Node node = graph.getNode(nodo);
-                    node.setAttribute("ui.style", "fill-color: " + colores[i % colores.length] + "; size: 15px;");
-                    if (nodo.contains("@")) {
-                        node.setAttribute("ui.style", "text-size: 15px; text-alignment: under; text-offset: 0px, 2px;");
+                    if (node != null) { 
+                        node.setAttribute("ui.style", "fill-color: " + colores[i % colores.length] + "; size: 15px;");
+                        if (nodo.contains("@")) {
+                            node.setAttribute("ui.style", "text-size: 15px; text-alignment: under; text-offset: 0px, 2px;");
+                        }
                     }
                 }
             }
         }
-
-        // Muestra el grafo.
-        graph.display();
     }
 
 }
+
